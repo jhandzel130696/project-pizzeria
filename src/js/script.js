@@ -67,14 +67,14 @@
       const generatedHTML = templates.menuProduct(thisProduct.data);
       
       //create element using utils.createElementFromHTML
-       thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
       //find menu container
       const menuContainer = document.querySelector(select.containerOf.menu);     
       
       //add element to menu
       menuContainer.appendChild(thisProduct.element);
     }
-      initAccordion(){
+    initAccordion(){
       const thisProduct=this;
 
       /* find the clickable trigger (the element that should react to clicking) */
@@ -90,10 +90,11 @@
         
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         for(let link of findActiveClass){
-          thisProduct.element!=null;
-          link.classList.remove(classNames.menuProduct.wrapperActive);
+          if(link!== thisProduct.element){
+          
+            link.classList.remove(classNames.menuProduct.wrapperActive);
+          }
         }
-        
 
         /* toggle active class on thisProduct.element */
         thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
