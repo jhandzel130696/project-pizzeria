@@ -86,11 +86,12 @@
         event.preventDefault();
 
         /* find active product (product that has active class) */
-        const findActiveClass = thisProduct.element.querySelectorAll(select.all.menuProductsActive);
+        const findActiveClass = document.querySelectorAll(select.all.menuProductsActive);
         
         /* if there is active product and it's not thisProduct.element, remove class active from it */
         for(let link of findActiveClass){
           if(link!== thisProduct.element){
+            
           
             link.classList.remove(classNames.menuProduct.wrapperActive);
           }
