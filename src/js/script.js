@@ -168,20 +168,12 @@
           }
         
           const optionImage=thisProduct.imageWrapper.querySelector('.'+paramId+'-'+optionId);
-          console.log(optionImage);
-          if(formData[paramId]&& formData[paramId].includes(optionId)){
-            if(!option.default===true){
+          
+          if (optionImage){
+            if(formData[paramId]&& formData[paramId].includes(optionId)){
               optionImage.classList.add(classNames.menuProduct.imageVisible);
-
-              
-            }
-
+            }else{optionImage.classList.remove(classNames.menuProduct.imageVisible);}
           }
-          else{
-            if(option.default===true){
-              optionImage.classList.remove(classNames.menuProduct.imageVisible);
-            }
-          } 
         }
       } 
       // update calculated price in the HTML
