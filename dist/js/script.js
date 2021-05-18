@@ -138,6 +138,8 @@
       console.log('formData',formData);
       // set price to default price
       let price=thisProduct.data.price;
+      
+      
       // for every category (param)...
       for (let paramId in thisProduct.data.params){
         // determine param value, e.g. paramId = 'toppings', param = { label: 'Toppings', type: 'checkboxes'... }
@@ -184,6 +186,7 @@
       } 
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML=price;
+      
       
     }
   }
