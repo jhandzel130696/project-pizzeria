@@ -167,8 +167,8 @@
         
           const optionImage=thisProduct.imageWrapper.querySelector('.paramId-optionId');
           if(optionImage){
-              console.log('optionImage',true);
-          };
+            console.log('optionImage',true);
+          }
           
         }
       } 
