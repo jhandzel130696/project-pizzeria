@@ -216,13 +216,15 @@
       const newValue=parseInt(value);
 
       //add validation
-        thisWidget.value=settings.amountWidget.defaultValue;
-
+      
+      thisWidget.value=settings.amountWidget.defaultValue;
       if (thisWidget.value !== newValue && !isNaN(newValue)&& newValue>=settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
         thisWidget.value=newValue;
-        thisWidget.input.value=thisWidget.value;
+        
         thisWidget.announce();
       }
+      thisWidget.input.value=thisWidget.value;
+      
       
     }
     announce(){
