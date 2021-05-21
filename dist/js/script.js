@@ -299,12 +299,12 @@
       const thisCart=this;
       thisCart.dom={};
       thisCart.dom.wrapper=element;
-      thisCart.dom.toggleTrigger=select.cart.toggleTrigger;
+      thisCart.dom.toggleTrigger=element.querySelector(select.cart.toggleTrigger);
     }
     initActions(){
       const thisCart=this;
-      thisCart.dom.toggleTrigger.AddEventListener('click',function(){
-        thisCart.dom.wrapper.toggle(classNames.cart.wrapperActive);
+      thisCart.dom.toggleTrigger.addEventListener('click',function(){
+        thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
     }
   }
@@ -331,7 +331,7 @@
       thisApp.initMenu();
       thisApp.initCart();
     },
-    initCart: function(){
+    initCart(){
       const thisApp=this;
       const cartElem=document.querySelector(select.containerOf.cart);
       thisApp.cart= new Cart(cartElem);
