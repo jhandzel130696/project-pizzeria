@@ -125,6 +125,10 @@
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
       thisProduct.amountWidgetElem=thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
+    addToCart(){
+      const thisProduct=this;
+      app.cart.add(thisProduct);
+    }
     initAmountWidget(){
       const thisProduct=this;
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
@@ -174,6 +178,7 @@
       thisProduct.cartButton.addEventListener('click',function(event){
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCard();
       });
     }
     processOrder(){
@@ -294,6 +299,10 @@
       thisCart.getElements(element);
       thisCart.initActions();
       console.log('new Cart', thisCart);
+    }
+    add(menuProduct){
+      //const thisCart=this;
+      console.log('adding product', menuProduct);
     }
     getElements(element){
       const thisCart=this;
