@@ -233,7 +233,7 @@
       console.log('AmountWidget',thisWidget);
       console.log('constructor arguments:',element);
       thisWidget.getElements(element);
-      thisWidget.setValue(thisWidget.input.value);
+      thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue  );
       thisWidget.initActions();
       
     }
@@ -251,13 +251,14 @@
 
       //add validation
       
-      thisWidget.value=settings.amountWidget.defaultValue;
+      
       if (thisWidget.value !== newValue && !isNaN(newValue)&& newValue>=settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
         thisWidget.value=newValue;
         
         thisWidget.announce();
+        thisWidget.input.value=thisWidget.value;
       }
-      thisWidget.input.value=thisWidget.value;
+      
       
       
     }
