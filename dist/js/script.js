@@ -125,9 +125,21 @@
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
       thisProduct.amountWidgetElem=thisProduct.element.querySelector(select.menuProduct.amountWidget);
     }
+    prepareCartProduct(){
+      const thisProduct=this;
+      const productSummary={
+        id: thisProduct.id,
+        name:thisProduct.name,
+        amount:thisProduct.amount,
+        priceSingle:thisProduct.priceSingle,
+        price:thisProduct.priceSingle*thisProduct.amountWidget.value,
+        params:{}
+      };
+      return productSummary;
+    }
     addToCart(){
       const thisProduct=this;
-      app.cart.add(thisProduct);
+      app.cart.add(thisProduct.prepareCartProduct());
     }
     initAmountWidget(){
       const thisProduct=this;
@@ -178,7 +190,7 @@
       thisProduct.cartButton.addEventListener('click',function(event){
         event.preventDefault();
         thisProduct.processOrder();
-        thisProduct.addToCard();
+        thisProduct.addToCart();
       });
     }
     processOrder(){
@@ -227,6 +239,7 @@
         }
       } 
       // update calculated price in the HTML
+      thisProduct.priceSingle=price;
       price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML=price;
       
