@@ -165,7 +165,7 @@
           //console.log('option',option);
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(formData[paramId]&& formData[paramId].includes(optionId)){
-            params[paramId].options[optionId] = option.label;
+            params[paramId].options[optionId] =option.label;
           } 
          
           
@@ -358,7 +358,12 @@
       console.log('new Cart', thisCart);
     }
     add(menuProduct){
-      //const thisCart=this;
+      const thisCart=this;
+      const generatedHTML=templates.cartProduct(menuProduct);
+      thisCart.element=utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(thisCart.element);
+    
+
       console.log('adding product', menuProduct);
     }
     getElements(element){
@@ -366,6 +371,7 @@
       thisCart.dom={};
       thisCart.dom.wrapper=element;
       thisCart.dom.toggleTrigger=element.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList=element.querySelector(select.cart.productList);
     }
     initActions(){
       const thisCart=this;
