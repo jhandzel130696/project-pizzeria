@@ -96,7 +96,7 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      console.log('new Product:',thisProduct);
+      //console.log('new Product:',thisProduct);
     }
     renderInMenu(){
       const thisProduct = this;
@@ -294,8 +294,8 @@
   class AmountWidget{
     constructor(element){
       const thisWidget=this;
-      console.log('AmountWidget',thisWidget);
-      console.log('constructor arguments:',element);
+      //console.log('AmountWidget',thisWidget);
+      //console.log('constructor arguments:',element);
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value || settings.amountWidget.defaultValue  );
       thisWidget.initActions();
@@ -355,18 +355,20 @@
       thisCart.products=[];
       thisCart.getElements(element);
       thisCart.initActions();
-      console.log('new Cart', thisCart);
+      thisCart.update();
+      
+      //console.log('new Cart', thisCart);
     }
     add(menuProduct){
       const thisCart=this;
       const generatedHTML=templates.cartProduct(menuProduct);
-      thisCart.element=utils.createDOMFromHTML(generatedHTML);
-      thisCart.dom.productList.appendChild(thisCart.element);
-      thisCart.products.push(new CartProduct(menuProduct,generatedDOM));
-      console.log('thisCart.products', thisCart.products);
+      const generatedDOM=utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      //console.log('thisCart.products', thisCart.products);
 
-    
-
+      console.log(thisCart.products);
+      
       console.log('adding product', menuProduct);
     }
     getElements(element){
@@ -382,18 +384,35 @@
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
     }
+    update(){
+      const thisCart=this;
+      const deliveryFee= settings.cart.defaultDeliveryFee;
+      console.log('deliverFee',deliveryFee);
+      let totalNumber=0;
+      let subTotalPrice=0;
+     
+      for (let product of thisCart.products){
+      totalNumber= totalNumber +product.amount;
+      subTotalPrice= subTotalPrice + product.price;   
+      }
+      thisCart.totalPrice=thisCart.subTotalPrice;
+      console.log('moje cena całkowita',thisCart.totalPrice);
+      
+    }
   }
   class CartProduct {
     constructor(menuProduct,element){
       const thisCartProduct=this;
-      thisCartProduct.id = menuProduct.id,
+      thisCartProduct.id = menuProduct.id,  //te wszystkie referencje odnoszą sie do menuProduct, ktore zawiera wszystkie potrzebne informacje w klasie Cart (patrz na console log adding product i zrozumiesz)
       thisCartProduct.name = menuProduct.name,
       thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.priceSingle = menuProduct.priceSingle,
       thisCartProduct.price = menuProduct.price;
       thisCartProduct.params = menuProduct.params;
       thisCartProduct.getElements(element);
-      console.log('cartProduct',thisCartProduct);
+      thisCartProduct.initAmountWidget();
+      //console.log('cartProduct',thisCartProduct);
+     
     }
     getElements(element){
       const thisCartProduct=this;
@@ -404,7 +423,16 @@
       thisCartProduct.dom.edit=element.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove=element.querySelector(select.cartProduct.remove);
     }
-  }
+    initAmountWidget(){
+      const thisCartProduct=this;
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
+        thisCartProduct.amount=thisCartProduct.amountWidget.value;
+        thisCartProduct.price=thisCartProduct.amount*thisCartProduct.priceSingle;
+        thisCartProduct.dom.price.innerHTML=thisCartProduct.price;
+     
+      });
+    }}
 
   const app = {
     
