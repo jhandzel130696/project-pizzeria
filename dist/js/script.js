@@ -380,8 +380,8 @@
       thisCart.dom.toggleTrigger=element.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList=element.querySelector(select.cart.productList);
       thisCart.dom.deliveryFee=element.querySelector(select.cart.deliveryFee);
-      thisCart.dom.subTotalPrice=element.querySelector(select.cart.subTotalPrice);
-      thisCart.dom.totalPrice=element.querySelector(select.cart.totalPrice);
+      thisCart.dom.subTotalPrice=element.querySelector(select.cart.subtotalPrice);
+      thisCart.dom.totalPrice=element.querySelectorAll(select.cart.totalPrice);
       thisCart.dom.totalNumber=element.querySelector(select.cart.totalNumber);
     }
     initActions(){
@@ -404,11 +404,27 @@
       }
       if (!totalNumber ==0){
         thisCart.totalPrice=subTotalPrice+deliveryFee;
+        
+        
       }
-      else{thisCart.totalPrice=0;}
+      if(totalNumber==0){
+        thisCart.totalPrice=0;
+        thisCart.dom.deliveryFee.innerHTML=0;
+      }
+      else{thisCart.dom.deliveryFee.innerHTML=deliveryFee;}
+      thisCart.dom.subTotalPrice.innerHTML=subTotalPrice;
       
-     
-     console.log('Selektor',select.cart.subTotalPrice);
+      thisCart.dom.totalNumber.innerHTML=totalNumber;
+
+      for(let selector of thisCart.dom.totalPrice){
+        selector.innerHTML=thisCart.totalPrice;
+      }
+
+
+
+
+
+      console.log('Selektor',thisCart.dom.totalPrice);
       console.log('moje cena całkowita',thisCart.totalPrice);
       console.log('totalNumber',totalNumber,'subtTotlPrice',subTotalPrice);
       
