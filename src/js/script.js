@@ -328,7 +328,9 @@
     }
     announce(){
       const thisWidget=this;
-      const event = new Event('updated');
+      const event = new CustomEvent('updated',{
+        bubbles:true
+      });
       thisWidget.element.dispatchEvent(event);
     }
     initActions(){
@@ -371,7 +373,7 @@
       console.log(thisCart.products);
       console.log(thisCart.dom.subTotalPrice);
       //console.log('adding product', menuProduct);
-     // console.log('moje cena całkowita',thisCart.totalPrice);
+      // console.log('moje cena całkowita',thisCart.totalPrice);
     }
     getElements(element){
       const thisCart=this;
@@ -388,6 +390,9 @@
       const thisCart=this;
       thisCart.dom.toggleTrigger.addEventListener('click',function(){
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+        thisCart.dom.productList.addEventListener('updated',function(){
+          thisCart.update();
+        });
       });
     }
     update(){
