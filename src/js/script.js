@@ -355,7 +355,7 @@
       thisCart.products=[];
       thisCart.getElements(element);
       thisCart.initActions();
-      thisCart.update();
+     
       
       //console.log('new Cart', thisCart);
     }
@@ -365,11 +365,13 @@
       const generatedDOM=utils.createDOMFromHTML(generatedHTML);
       thisCart.dom.productList.appendChild(generatedDOM);
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      thisCart.update();
       //console.log('thisCart.products', thisCart.products);
 
       console.log(thisCart.products);
-      
-      console.log('adding product', menuProduct);
+      console.log(thisCart.dom.subTotalPrice);
+      //console.log('adding product', menuProduct);
+     // console.log('moje cena całkowita',thisCart.totalPrice);
     }
     getElements(element){
       const thisCart=this;
@@ -377,6 +379,10 @@
       thisCart.dom.wrapper=element;
       thisCart.dom.toggleTrigger=element.querySelector(select.cart.toggleTrigger);
       thisCart.dom.productList=element.querySelector(select.cart.productList);
+      thisCart.dom.deliveryFee=element.querySelector(select.cart.deliveryFee);
+      thisCart.dom.subTotalPrice=element.querySelector(select.cart.subTotalPrice);
+      thisCart.dom.totalPrice=element.querySelector(select.cart.totalPrice);
+      thisCart.dom.totalNumber=element.querySelector(select.cart.totalNumber);
     }
     initActions(){
       const thisCart=this;
@@ -387,16 +393,24 @@
     update(){
       const thisCart=this;
       const deliveryFee= settings.cart.defaultDeliveryFee;
-      console.log('deliverFee',deliveryFee);
+     
       let totalNumber=0;
       let subTotalPrice=0;
-     
+      
       for (let product of thisCart.products){
-      totalNumber= totalNumber +product.amount;
-      subTotalPrice= subTotalPrice + product.price;   
+        totalNumber= totalNumber + product.amount;
+        subTotalPrice= subTotalPrice + product.price;   
+        
       }
-      thisCart.totalPrice=thisCart.subTotalPrice;
+      if (!totalNumber ==0){
+        thisCart.totalPrice=subTotalPrice+deliveryFee;
+      }
+      else{thisCart.totalPrice=0;}
+      
+     
+     console.log('Selektor',select.cart.subTotalPrice);
       console.log('moje cena całkowita',thisCart.totalPrice);
+      console.log('totalNumber',totalNumber,'subtTotlPrice',subTotalPrice);
       
     }
   }
