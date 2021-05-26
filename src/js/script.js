@@ -372,7 +372,8 @@
 
       console.log(thisCart.products);
       console.log(thisCart.dom.subTotalPrice);
-      //console.log('adding product', menuProduct);
+      console.log('adding product', menuProduct);
+      console.log('Moja instancja',new CartProduct(menuProduct, generatedDOM));
       // console.log('moje cena całkowita',thisCart.totalPrice);
     }
     getElements(element){
@@ -393,7 +394,25 @@
         thisCart.dom.productList.addEventListener('updated',function(){
           thisCart.update();
         });
+        thisCart.dom.productList.addEventListener('remove',function(event){
+          thisCart.remove(event.detail.cartProduct);
+        });
       });
+    }
+    remove(CartProduct){
+      const thisCart=this;
+      const indexOfProduct=thisCart.products.indexOf(CartProduct);
+      thisCart.products.splice(indexOfProduct,1);
+
+      CartProduct.dom.wrapper.remove();
+
+      thisCart.update();
+      
+
+
+      
+
+
     }
     update(){
       const thisCart=this;
@@ -446,6 +465,7 @@
       thisCartProduct.params = menuProduct.params;
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
+      thisCartProduct.initActions();
       //console.log('cartProduct',thisCartProduct);
      
     }
@@ -457,6 +477,29 @@
       thisCartProduct.dom.price=element.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit=element.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove=element.querySelector(select.cartProduct.remove);
+    }
+    remove(){
+      const thisCartProduct=this;
+      const event= new CustomEvent('remove',{
+        bubbles:true,
+        detail:{
+          cartProduct: thisCartProduct,
+        },
+      });
+      thisCartProduct.dom.wrapper.dispatchEvent(event);
+      console.log('wywolana');
+    }
+    initActions(){
+      const thisCartProduct=this;
+      thisCartProduct.dom.edit.addEventListener('click',function(event){
+        event.preventDefault();
+
+      });
+      thisCartProduct.dom.remove.addEventListener('click',function(event){
+        event.preventDefault();
+        thisCartProduct.remove();
+      });
+
     }
     initAmountWidget(){
       const thisCartProduct=this;
