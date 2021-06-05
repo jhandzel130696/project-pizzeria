@@ -1,7 +1,7 @@
 
 import {Handlebars} from './utils.js';
 import {dataSource} from './Product';
-export const utils = {}; 
+const utils = {}; 
 
 
 utils.createDOMFromHTML = function(htmlString) {
@@ -55,3 +55,4 @@ Handlebars.registerHelper('joinValues', function(input, options) {
   return Object.values(input).join(options.fn(this));
 });
 
+export default utils;
