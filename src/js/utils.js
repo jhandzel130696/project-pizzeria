@@ -1,7 +1,7 @@
 
-import {Handlebars} from './utils.js';
-import {dataSource} from './Product';
-const utils = {}; 
+//import {Handlebars} from './utils.js';
+//import {dataSource} from './Product';
+const utils = {}; // eslint-disable-line no-unused-vars
 
 
 utils.createDOMFromHTML = function(htmlString) {
