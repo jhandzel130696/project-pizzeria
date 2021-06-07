@@ -49,6 +49,7 @@ export const select = {
   nav: {
     links: '.main-nav a',
   },
+  
   // CODE ADDED START
   cart: {
     productList: '.cart__order-summary',
