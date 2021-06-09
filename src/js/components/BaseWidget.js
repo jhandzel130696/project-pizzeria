@@ -23,8 +23,8 @@ class BaseWidget {
 
     }
     parsedValue(value) {
-        return parseInt(value)
-    };
+        return parseInt(value);
+    }
 
     isValid(value) {
         return !isNaN(value);
