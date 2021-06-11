@@ -13,8 +13,8 @@ class Booking {
   }
   getData(){
     const thisBooking = this;
-    const startDateParam=settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePicker.minDate);
-    const endDateParam=settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePicker.maxDate);
+    const startDateParam=settings.db.dateStartParamKey + '=' + utils.dateToStr(thisBooking.datePickerWidget.minDate);
+    const endDateParam=settings.db.dateEndParamKey + '=' + utils.dateToStr(thisBooking.datePickerWidget.maxDate);
 
     const params = {
       booking:[
@@ -59,8 +59,8 @@ class Booking {
           eventsRepeatResponse.json(),
         ]);
       })
-      .then(function([bookings,eventsCurrent,eventsRepeat]){
-        console.log(bookings);
+      .then(function([booking,eventsCurrent,eventsRepeat]){
+        console.log(booking);
         console.log(eventsCurrent);
         console.log(eventsRepeat);
       });
