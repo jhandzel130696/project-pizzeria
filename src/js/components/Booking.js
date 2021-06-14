@@ -5,11 +5,12 @@ import HourPicker from './HourPicker.js';
 import utils from '../utils.js';
 class Booking {
   constructor(widgetContainerElement) {
+
     const thisBooking = this;
     thisBooking.render(widgetContainerElement);
     thisBooking.initWidgets();
     thisBooking.getData();
-
+    thisBooking.tableInformation='';
   }
   getData(){
     const thisBooking = this;
@@ -113,7 +114,6 @@ class Booking {
 
   updateDOM(){
     const thisBooking=this;
-    console.log('dupa');
 
     thisBooking.date = thisBooking.datePickerWidget.value;
     //console.log(thisBooking.hourPickerWidget.value);
@@ -156,6 +156,9 @@ class Booking {
     thisBooking.dom.hourPicker=document.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.datePicker=document.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.choosenTable= thisBooking.dom.wrapper.querySelector(select.booking.choosenTable);
+    
+    //console.log('stolik',thisBooking.dom.tables);
     //console.log('peopleAmount',thisBooking.dom.peopleAmount);
   }
 
@@ -167,7 +170,6 @@ class Booking {
     thisBooking.hoursAmountWidget = new AmountWidget(thisBooking.dom.hoursAmount);
     
     thisBooking.hourPickerWidget = new HourPicker(thisBooking.dom.hourPicker);
-    console.log(thisBooking.hourPickerWidget);
     thisBooking.datePickerWidget = new DatePicker(thisBooking.dom.datePicker);
 
     thisBooking.dom.wrapper.addEventListener('update', function() {
@@ -176,7 +178,14 @@ class Booking {
     });
 
     
+    thisBooking.dom.choosenTable.addEventListener('click',function(){
+      thisBooking.initTables();
+    });
+  }
 
+  initTables(event){
+    const atrybut = event.target.offsetParent.getAttribute('data-table');
+    console.log(atrybut);
   }
 
 
