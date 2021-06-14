@@ -13,6 +13,8 @@ class BaseWidget {
   set value(value) {
     const thisWidget = this;
     const newValue = parseInt(value);
+    //thisWidget.parseValue();
+
 
     //add validation
 
@@ -32,7 +34,7 @@ class BaseWidget {
 
     thisWidget.value = value;
   }
-  parsedValue(value) {
+  parseValue(value) {
     return parseInt(value);
   }
 

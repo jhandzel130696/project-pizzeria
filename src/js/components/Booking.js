@@ -169,6 +169,7 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('change', function() {
       thisBooking.updateDOM();
+     
     });
 
     
