@@ -170,7 +170,7 @@ class Booking {
     console.log(thisBooking.hourPickerWidget);
     thisBooking.datePickerWidget = new DatePicker(thisBooking.dom.datePicker);
 
-    thisBooking.dom.wrapper.addEventListener('change', function() {
+    thisBooking.dom.wrapper.addEventListener('update', function() {
       thisBooking.updateDOM();
      
     });
