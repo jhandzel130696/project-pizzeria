@@ -115,6 +115,7 @@ class Booking {
     const thisBooking=this;
 
     thisBooking.date = thisBooking.datePickerWidget.value;
+    console.log(thisBooking.hourPickerWidget.value);
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPickerWidget.value);
 
     let allAvailable = false;

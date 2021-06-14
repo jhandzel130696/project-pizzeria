@@ -12,7 +12,7 @@ class BaseWidget {
   }
   set value(value) {
     const thisWidget = this;
-    const newValue = parseInt(value);
+    const newValue = thisWidget.parseValue(value);
     //thisWidget.parseValue();
 
 
