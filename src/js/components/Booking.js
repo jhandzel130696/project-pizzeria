@@ -113,9 +113,10 @@ class Booking {
 
   updateDOM(){
     const thisBooking=this;
+    console.log('dupa');
 
     thisBooking.date = thisBooking.datePickerWidget.value;
-    console.log(thisBooking.hourPickerWidget.value);
+    //console.log(thisBooking.hourPickerWidget.value);
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPickerWidget.value);
 
     let allAvailable = false;
@@ -135,7 +136,7 @@ class Booking {
       if(
         !allAvailable
           &&
-          thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)> -1
+          thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ){
         table.classList.add(classNames.booking.tableBooked);
       }else {
@@ -166,6 +167,7 @@ class Booking {
     thisBooking.hoursAmountWidget = new AmountWidget(thisBooking.dom.hoursAmount);
     
     thisBooking.hourPickerWidget = new HourPicker(thisBooking.dom.hourPicker);
+    console.log(thisBooking.hourPickerWidget);
     thisBooking.datePickerWidget = new DatePicker(thisBooking.dom.datePicker);
 
     thisBooking.dom.wrapper.addEventListener('change', function() {
