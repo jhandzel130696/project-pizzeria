@@ -187,6 +187,7 @@ class Booking {
       if(!target.classList.contains('booked')){
         if(target.classList.contains('object' && 'table')){
           if(!target.classList.contains('choosen-table')){
+            thisBooking.dom.choosenTable.classList.remove('choosen-table');
             target.classList.add('choosen-table');
             thisBooking.tableInformation = atrybut;
           }else{
