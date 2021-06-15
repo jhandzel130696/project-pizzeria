@@ -178,14 +178,32 @@ class Booking {
     });
 
     
-    thisBooking.dom.choosenTable.addEventListener('click',function(){
-      thisBooking.initTables();
+    thisBooking.dom.choosenTable.addEventListener('click',function(event){
+      event.preventDefault();
+      //thisBooking.initTables();
+      const target = event.target;
+      const atrybut = target.getAttribute('data-table');// dziala, ale chcialem uzyc offsetParent jak w poprzednim projekcie, tylko, ze tamta opcja zwracala null
+      //console.log(atrybut);
+      if(!target.classList.contains('booked')){
+        if(target.classList.contains('object' && 'table')){
+          if(!target.classList.contains('choosen-table')){
+            target.classList.add('choosen-table');
+            thisBooking.tableInformation = atrybut;
+          }else{
+            target.classList.remove('choosen-table');
+          }}else{console.log('To nie stolik');}} else{
+        alert('Stolik zajety');
+      }
+      
+      
+      console.log('stolik',thisBooking.tableInformation);
+     
     });
   }
-
-  initTables(event){
-    const atrybut = event.target.offsetParent.getAttribute('data-table');
-    console.log(atrybut);
+  //na razie nic nie robisz z ta metoda 
+  initTables(){
+    
+    
   }
 
 
