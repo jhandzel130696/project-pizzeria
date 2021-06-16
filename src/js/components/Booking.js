@@ -130,8 +130,9 @@ class Booking {
     }
     
     const refresh = document.querySelector('.choosen-table');
-    console.log('stala refresh',refresh);
-    refresh.classList.remove('choosen-table');
+    if (refresh){
+      console.log('stala refresh',refresh);
+      refresh.classList.remove('choosen-table');}
     for (let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if(!isNaN(tableId)){
@@ -168,6 +169,7 @@ class Booking {
   }
 
   initWidgets() {
+    
     const thisBooking = this;
     thisBooking.peopleAmountWidget = new AmountWidget(thisBooking.dom.peopleAmount);
 
@@ -179,8 +181,15 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function() {
       thisBooking.updateDOM();
+    
+     
+
      
     });
+
+   
+
+
 
     
     thisBooking.dom.choosenTable.addEventListener('click',function(event){
@@ -209,6 +218,11 @@ class Booking {
       console.log('stolik',thisBooking.tableInformation);
      
     });
+    
+  }
+
+  sendBooking(){
+
   }
   
   
