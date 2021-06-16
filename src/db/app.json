@@ -254,7 +254,27 @@
         "duration": 2,
         "ppl": 3,
         "starters": ["lemonWater"]
-      }
+      },
+      {
+         "id": 6,
+         "date": "2021-01-01",
+         "hour": "24:00",
+         "table": 2,
+         "repeat": "daily",
+         "duration": 2,
+         "ppl": 3,
+         "starters": ["lemonWater"]
+       }
+       {
+         "id": 7,
+         "date": "2021-01-01",
+         "hour": "20:00",
+         "table": 2,
+         "repeat": "daily",
+         "duration": 2,
+         "ppl": 3,
+         "starters": ["lemonWater"]
+       }
     ],
     "booking": []
  }

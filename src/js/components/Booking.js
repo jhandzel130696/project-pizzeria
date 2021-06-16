@@ -128,6 +128,10 @@ class Booking {
     ){
       allAvailable == true;
     }
+    
+    const refresh = document.querySelector('.choosen-table');
+    console.log('stala refresh',refresh);
+    refresh.classList.remove('choosen-table');
     for (let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if(!isNaN(tableId)){
@@ -196,6 +200,7 @@ class Booking {
             thisBooking.tableInformation = atrybut;
           }else{
             target.classList.remove('choosen-table');
+            thisBooking.tableInformation='';
           }}else{console.log('To nie stolik');}} else{
         alert('Stolik zajety');
       }
@@ -205,11 +210,8 @@ class Booking {
      
     });
   }
-  //na razie nic nie robisz z ta metoda 
-  initTables(){
-    
-    
-  }
+  
+  
 
 
 
