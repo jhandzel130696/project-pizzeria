@@ -131,7 +131,6 @@ class Booking {
     
     const refresh = document.querySelector('.choosen-table');
     if (refresh){
-      console.log('stala refresh',refresh);
       refresh.classList.remove('choosen-table');}
     for (let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
@@ -148,6 +147,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+    
   }
 
   render(widgetContainerElement) {
@@ -163,7 +163,7 @@ class Booking {
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.choosenTable= thisBooking.dom.wrapper.querySelector(select.booking.choosenTable);
     thisBooking.dom.iterableObject=thisBooking.dom.wrapper.querySelectorAll(select.booking.tableClass);
-    
+    thisBooking.dom.btnOrder=document.querySelector(select.booking.btn);
     //console.log('stolik',thisBooking.dom.tables);
     //console.log('peopleAmount',thisBooking.dom.peopleAmount);
   }
@@ -210,20 +210,26 @@ class Booking {
           }else{
             target.classList.remove('choosen-table');
             thisBooking.tableInformation='';
-          }}else{console.log('To nie stolik');}} else{
+          }}else{alert('To nie stolik');}} else{
         alert('Stolik zajety');
       }
       
       
-      console.log('stolik',thisBooking.tableInformation);
+      
      
+    });
+
+    thisBooking.dom.btnOrder.addEventListener('click',function(){
+      thisBooking.sendBooking();
     });
     
   }
 
   sendBooking(){
-
+    console.log('dziala');
   }
+
+
   
   
 
