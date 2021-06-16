@@ -157,6 +157,7 @@ class Booking {
     thisBooking.dom.datePicker=document.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.choosenTable= thisBooking.dom.wrapper.querySelector(select.booking.choosenTable);
+    thisBooking.dom.iterableObject=thisBooking.dom.wrapper.querySelectorAll(select.booking.tableClass);
     
     //console.log('stolik',thisBooking.dom.tables);
     //console.log('peopleAmount',thisBooking.dom.peopleAmount);
@@ -187,7 +188,10 @@ class Booking {
       if(!target.classList.contains('booked')){
         if(target.classList.contains('object' && 'table')){
           if(!target.classList.contains('choosen-table')){
-            thisBooking.dom.choosenTable.classList.remove('choosen-table');
+            for (let link of thisBooking.dom.iterableObject){
+              link.classList.remove('choosen-table');
+            }
+            
             target.classList.add('choosen-table');
             thisBooking.tableInformation = atrybut;
           }else{

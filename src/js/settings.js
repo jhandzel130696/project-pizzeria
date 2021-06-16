@@ -47,6 +47,7 @@ export const select = {
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     choosenTable:'.floor-plan',
+    tableClass:'.object'&&'.table',
   },
   nav: {
     links: '.main-nav a',
