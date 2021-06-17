@@ -11,6 +11,7 @@ class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.tableInformation='';
+    
   }
   getData(){
     const thisBooking = this;
@@ -164,7 +165,11 @@ class Booking {
     thisBooking.dom.choosenTable= thisBooking.dom.wrapper.querySelector(select.booking.choosenTable);
     thisBooking.dom.iterableObject=thisBooking.dom.wrapper.querySelectorAll(select.booking.tableClass);
     thisBooking.dom.btnOrder=thisBooking.dom.wrapper.querySelector(select.booking.btn);
-    //console.log('stolik',thisBooking.dom.tables);
+    thisBooking.dom.phone=thisBooking.dom.wrapper.querySelector(select.booking.phone);
+    thisBooking.dom.address=thisBooking.dom.wrapper.querySelector(select.booking.address);
+    thisBooking.dom.checkBox=thisBooking.dom.wrapper.querySelector(select.booking.checkbox);
+    thisBooking.dom.starters=[];
+    //console.log('stolik',thisBooking.dom.checkBox);
     //console.log('peopleAmount',thisBooking.dom.peopleAmount);
   }
 
@@ -172,8 +177,8 @@ class Booking {
     
     const thisBooking = this;
     thisBooking.peopleAmountWidget = new AmountWidget(thisBooking.dom.peopleAmount);
-
-
+    
+    
     thisBooking.hoursAmountWidget = new AmountWidget(thisBooking.dom.hoursAmount);
     
     thisBooking.hourPickerWidget = new HourPicker(thisBooking.dom.hourPicker);
@@ -218,11 +223,23 @@ class Booking {
       
      
     });
-    thisBooking.dom.btnOrder.addEventListener('click',function(){
+    thisBooking.dom.btnOrder.addEventListener('click',function(event){
+      event.preventDefault();
       thisBooking.sendBooking();
     });
 
-    
+    thisBooking.dom.checkBox.addEventListener('click',function(event){
+      const thisBooking=this;
+      
+      const target = event.target;
+
+      
+      if(!target.checked){
+        thisBooking.bookingLoad.starters.push(target.value);
+        console.log('dziala');
+      }
+      
+    });
   }
 
   
@@ -230,7 +247,19 @@ class Booking {
   sendBooking(){
     const thisBooking=this;
     const url = settings.db.url + '/' + settings.db.booking;
+
+    const bookingLoad = {
+      date:thisBooking.datePickerWidget.value,
+      hour:thisBooking.hourPickerWidget.value,
+      table:parseInt(thisBooking.tableInformation),
+      duration:thisBooking.hoursAmountWidget.value,
+      ppl:thisBooking.peopleAmountWidget.value,
+      starters:[],
+      phone:thisBooking.dom.phone.value,
+      address:thisBooking.dom.address.value,
+    };
     
+    console.log(bookingLoad);
   }
 
 

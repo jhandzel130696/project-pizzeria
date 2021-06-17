@@ -49,6 +49,9 @@ export const select = {
     choosenTable:'.floor-plan',
     tableClass:'.object'&&'.table',
     btn:'.btn-secondary',
+    phone:'.order-confirmation' && '.telephone',
+    address:'.order-confirmation' && '.address',
+    checkbox:'.checkBoxStarters',
   },
   nav: {
     links: '.main-nav a',
