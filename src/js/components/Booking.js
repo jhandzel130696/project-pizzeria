@@ -163,7 +163,7 @@ class Booking {
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.choosenTable= thisBooking.dom.wrapper.querySelector(select.booking.choosenTable);
     thisBooking.dom.iterableObject=thisBooking.dom.wrapper.querySelectorAll(select.booking.tableClass);
-    thisBooking.dom.btnOrder=document.querySelector(select.booking.btn);
+    thisBooking.dom.btnOrder=thisBooking.dom.wrapper.querySelector(select.booking.btn);
     //console.log('stolik',thisBooking.dom.tables);
     //console.log('peopleAmount',thisBooking.dom.peopleAmount);
   }
@@ -204,9 +204,9 @@ class Booking {
             for (let link of thisBooking.dom.iterableObject){
               link.classList.remove('choosen-table');
             }
-            
             target.classList.add('choosen-table');
             thisBooking.tableInformation = atrybut;
+            
           }else{
             target.classList.remove('choosen-table');
             thisBooking.tableInformation='';
@@ -218,19 +218,23 @@ class Booking {
       
      
     });
-
     thisBooking.dom.btnOrder.addEventListener('click',function(){
       thisBooking.sendBooking();
     });
+
     
   }
 
+  
+
   sendBooking(){
-    console.log('dziala');
+    const thisBooking=this;
+    const url = settings.db.url + '/' + settings.db.booking;
+    
   }
 
 
-  
+ 
   
 
 
