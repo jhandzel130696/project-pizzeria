@@ -169,6 +169,7 @@ class Booking {
     thisBooking.dom.address=thisBooking.dom.wrapper.querySelector(select.booking.address);
     thisBooking.dom.checkBox=thisBooking.dom.wrapper.querySelector(select.booking.checkbox);
     thisBooking.dom.starters=[];
+    
     //console.log('stolik',thisBooking.dom.checkBox);
     //console.log('peopleAmount',thisBooking.dom.peopleAmount);
   }
@@ -229,17 +230,22 @@ class Booking {
     });
 
     thisBooking.dom.checkBox.addEventListener('click',function(event){
-      const thisBooking=this;
+      
       
       const target = event.target;
 
-      
-      if(!target.checked){
-        thisBooking.bookingLoad.starters.push(target.value);
-        console.log('dziala');
+      if(target.tagName==='INPUT'&&target.type==='checkbox'&&target.name==='starter'){
+        if(target.checked){
+          thisBooking.dom.starters.push(target.value);
+        
+        
+        }}else{
+        const check = thisBooking.dom.starters.indexOf(target.value);
+        thisBooking.dom.starters.splice(check,1);
       }
-      
+      console.log(thisBooking.dom.starters);
     });
+    
   }
 
   
