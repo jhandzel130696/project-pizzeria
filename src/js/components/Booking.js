@@ -231,11 +231,11 @@ class Booking {
 
     thisBooking.dom.checkBox.addEventListener('click',function(event){
       
-      
+     
       const target = event.target;
-
       if(target.tagName==='INPUT'&&target.type==='checkbox'&&target.name==='starter'){
         if(target.checked){
+
           thisBooking.dom.starters.push(target.value);
         
         
@@ -264,8 +264,26 @@ class Booking {
       phone:thisBooking.dom.phone.value,
       address:thisBooking.dom.address.value,
     };
+    const options = {
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+      },
+      body:JSON.stringify(bookingLoad)
+    };
+    fetch(url,options)
+      .then(function(response){
+        return response.json();
+      }).then(function(parsedResponse){
+        console.log('parsedResponse',parsedResponse);
+
+        thisBooking.booked=parsedResponse;
+        //console.log(thisBooking.booked);
+
+       
+      });
     
-    console.log(bookingLoad);
+    
   }
 
 
