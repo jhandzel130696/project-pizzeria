@@ -2,13 +2,22 @@ import {settings,select,classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import homePage from './components/homePage.js';
 const app = {
+  initHomePage:function(){
+    const thisApp=this;
+    const widgetContainerHomePage=document.querySelector(select.containerOf.home);
+
+    thisApp.homePage=new homePage(widgetContainerHomePage);
+  },
+
   initBooking: function(){
     const thisApp=this;
     const widgetContainer=document.querySelector(select.containerOf.booking);
     //console.log('widgetContainer',widgetContainer);
     thisApp.booking= new Booking(widgetContainer);
   },
+
     
   initPages: function (){
     const thisApp =this;
@@ -96,6 +105,7 @@ const app = {
     // console.log('classNames:', classNames);
     //console.log('settings:', settings);
     // console.log('templates:', templates);
+    thisApp.initHomePage();
     thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();

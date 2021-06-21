@@ -167,10 +167,10 @@ class Booking {
     thisBooking.dom.btnOrder=thisBooking.dom.wrapper.querySelector(select.booking.btn);
     thisBooking.dom.phone=thisBooking.dom.wrapper.querySelector(select.booking.phone);
     thisBooking.dom.address=thisBooking.dom.wrapper.querySelector(select.booking.address);
-    thisBooking.dom.checkBox=thisBooking.dom.wrapper.querySelector(select.booking.checkbox);
+    thisBooking.dom.start=thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
     thisBooking.dom.starters=[];
     
-    //console.log('stolik',thisBooking.dom.checkBox);
+    console.log('stolik',thisBooking.dom.start);
     //console.log('peopleAmount',thisBooking.dom.peopleAmount);
   }
 
@@ -229,22 +229,7 @@ class Booking {
       thisBooking.sendBooking();
     });
 
-    thisBooking.dom.checkBox.addEventListener('click',function(event){
-      
-     
-      const target = event.target;
-      if(target.tagName==='INPUT'&&target.type==='checkbox'&&target.name==='starter'){
-        if(target.checked){
 
-          thisBooking.dom.starters.push(target.value);
-        
-        
-        }}else{
-        const check = thisBooking.dom.starters.indexOf(target.value);
-        thisBooking.dom.starters.splice(check,1);
-      }
-      console.log(thisBooking.dom.starters);
-    });
     
   }
 
@@ -264,6 +249,12 @@ class Booking {
       phone:thisBooking.dom.phone.value,
       address:thisBooking.dom.address.value,
     };
+
+    for (let starter of thisBooking.dom.start){
+      if(starter.checked==true){
+        bookingLoad.starters.push(starter.value);
+      }
+    }
     const options = {
       method:'POST',
       headers:{
@@ -278,7 +269,7 @@ class Booking {
         console.log('parsedResponse',parsedResponse);
 
         thisBooking.booked=parsedResponse;
-        //console.log(thisBooking.booked);
+        console.log(thisBooking.booked);
 
        
       });
